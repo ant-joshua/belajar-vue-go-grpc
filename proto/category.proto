@@ -1,0 +1,35 @@
+syntax = "proto3";
+package private;
+
+option go_package = ".;proto";
+import "google/protobuf/empty.proto";
+
+message Category{
+    int64 id = 1;
+    string name = 2;
+}
+
+message CategoryCreateRequest{
+    string name = 1;
+}
+
+message CategoryUpdateRequest{
+    int64 id = 1;
+    string name = 2;
+}
+
+message CategoryDeleteRequest{
+    int64 id = 1;
+}
+
+message GetAllResponse{
+    repeated Category listCategory = 1;
+}
+
+
+service CategoryService{
+    rpc GetAll(google.protobuf.Empty) returns (GetAllResponse) {}
+    rpc Create(CategoryCreateRequest) returns (Category) {}
+    rpc Update(CategoryUpdateRequest) returns (Category) {}
+    rpc Delete(CategoryDeleteRequest) returns (google.protobuf.Empty) {}
+}
